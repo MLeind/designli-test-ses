@@ -7,7 +7,7 @@ Brief NestJS project exposing two endpoints:
 
 ## Repository layout
 
-- `project/` – Main NestJS project (application code, tests and tooling)
+- `project/test` – Main NestJS project (application code, tests and tooling)
 - `public_data/` – Test fixtures for the email endpoint. This folder is kept outside the app because a simple HTTP server was used to serve the files for testing.
 	- `email-attachment-json.eml` – Email with a .json attachment
 	- `email-link-direct-json.eml` – Email whose plaintext body links directly to a .json URL
@@ -28,7 +28,7 @@ Brief NestJS project exposing two endpoints:
 1) Install dependencies and start the API
 
 ```bash
-cd project/
+cd project/test
 npm install
 npm run start:dev
 ```
@@ -88,7 +88,7 @@ Returns a normalized JSON with the following fields:
 - `spam` (boolean) – spam verdict passed
 - `virus` (boolean) – virus verdict passed
 - `dns` (boolean) – SPF, DKIM, and DMARC verdicts all passed
-- `month` (string) – month name (english) derived from `mail.timestamp`
+- `month` (string) – month name derived from `mail.timestamp`
 - `delayed` (boolean) – true if `receipt.processingTimeMillis > 1000`
 - `sender` (string) – local part of `mail.source`
 - `recipients` (string[]) – local parts of `mail.destination[]`
@@ -104,7 +104,7 @@ curl -X POST "http://localhost:3000/map" \
 
 ## Project structure (app)
 
-Inside `project`:
+Inside `project/test`:
 
 - `src/main.ts` – App bootstrap, sets global validation pipe
 - `src/email/` – Email ingestion endpoint and logic
@@ -130,8 +130,9 @@ Key dependencies:
 - Linting, tests, and build scripts are available in `project/package.json`.
 
 
-## Scripts (from `project`)
-
+## Scripts (from `project/test`)
+- `npm install @nestjs/common @nestjs/core mailparser axios jsdom class-transformer class-validator`
+- `npm install --save-dev @types/node`
 - `npm run start:dev` – Start in watch mode
 - `npm run build` – Build to `dist/`
 - `npm test` / `npm run test:e2e` – Unit/E2E tests
