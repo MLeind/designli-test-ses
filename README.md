@@ -30,6 +30,8 @@ Brief NestJS project exposing two endpoints:
 ```bash
 cd project/test
 npm install
+npm install @nestjs/common @nestjs/core mailparser axios jsdom class-transformer class-validator
+npm install --save-dev @types/node
 npm run start:dev
 ```
 
