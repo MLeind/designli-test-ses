@@ -7,7 +7,7 @@ Brief NestJS project exposing two endpoints:
 
 ## Repository layout
 
-- `project/test` – Main NestJS project (application code, tests and tooling)
+- `project/` – Main NestJS project (application code, tests and tooling)
 - `public_data/` – Test fixtures for the email endpoint. This folder is kept outside the app because a simple HTTP server was used to serve the files for testing.
 	- `email-attachment-json.eml` – Email with a .json attachment
 	- `email-link-direct-json.eml` – Email whose plaintext body links directly to a .json URL
@@ -28,7 +28,7 @@ Brief NestJS project exposing two endpoints:
 1) Install dependencies and start the API
 
 ```bash
-cd project/test
+cd project/
 npm install
 npm run start:dev
 ```
@@ -40,12 +40,13 @@ By default the API listens on `http://localhost:3000` (override with `PORT` env 
 While the email endpoint can read local file paths, it also supports URLs. To mimic “real world” emails that point to HTTP resources, you can serve `public_data/` with any static server, e.g.:
 
 ```bash
-# Option A: Python 3 built-in server
+# Option A: Node http-server
 cd public_data
-python3 -m http.server 8080
+npx http-server -p 8080 public_data
 
-# Option B: Node http-server (if installed)
-# npx http-server -p 8080 public_data
+# Option B: Python 3 built-in server (if installed)
+# python3 -m http.server 8080
+
 ```
 
 Your files will be available at `http://localhost:8080/...`.
@@ -53,7 +54,7 @@ Your files will be available at `http://localhost:8080/...`.
 
 ## Endpoints
 
-### 1) GET /email
+### 1 GET /email
 
 Extracts and returns the first valid JSON referenced by the email provided. The source is specified via the `path` query param and can be:
 - An absolute path to a local `.eml` file
@@ -77,7 +78,7 @@ curl "http://localhost:3000/email?path=http://localhost:8080/email-link-via-page
 If no JSON is found, the endpoint returns HTTP 400 with a short message.
 
 
-### 2) POST /map
+### 2 POST /map
 
 Accepts either:
 - An AWS SNS→SES event (where `Records[0].Sns.Message` contains a JSON string with the SES message), or
@@ -103,7 +104,7 @@ curl -X POST "http://localhost:3000/map" \
 
 ## Project structure (app)
 
-Inside `project/test`:
+Inside `project`:
 
 - `src/main.ts` – App bootstrap, sets global validation pipe
 - `src/email/` – Email ingestion endpoint and logic
@@ -126,18 +127,14 @@ Key dependencies:
 
 - The `public_data` folder is intentionally outside the app because it was served by a simple HTTP server for tests and demos.
 - Demo videos `case 1.mp4` and `case 2.mp4` show example runs of both endpoints.
-- Linting, tests, and build scripts are available in `project/test/package.json`.
+- Linting, tests, and build scripts are available in `project/package.json`.
 
 
-## Scripts (from `project/test`)
+## Scripts (from `project`)
 
 - `npm run start:dev` – Start in watch mode
 - `npm run build` – Build to `dist/`
 - `npm test` / `npm run test:e2e` – Unit/E2E tests
 - `npm run lint` – ESLint with fixes
 
-
-## License
-
-UNLICENSED
 
