@@ -1,0 +1,11 @@
+From: "QA Bot" <sender@example.com>
+To: recipient@example.com
+Subject: Caso 2 - Enlace directo a JSON (mismo de prueba)
+Date: Wed, 13 Aug 2025 21:42:08 -0000
+Message-ID: <case2-1755121328@example.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Descarga el JSON de prueba aquí:
+http://localhost:8080/ses-sns-event.json

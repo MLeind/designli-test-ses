@@ -1,0 +1,14 @@
+From: "QA Bot" <sender@example.com>
+To: recipient@example.com
+Subject: Caso 3 - Enlace a página con enlace al mismo JSON de prueba
+Date: Wed, 13 Aug 2025 21:42:08 -0000
+Message-ID: <case3-1755121328@example.com>
+MIME-Version: 1.0
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<!doctype html>
+<html><body>
+  <p>Visita esta página y luego descarga el JSON de prueba:</p>
+  <a href="http://localhost:8080/page-with-json.html">Abrir página</a>
+</body></html>
